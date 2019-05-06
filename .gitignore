@@ -62,3 +62,7 @@ target/
 
 # venv
 venv/*
+
+
+
+app/static
