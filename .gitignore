@@ -63,6 +63,5 @@ target/
 # venv
 venv/*
 
-
-
-app/static
+# Static app files (generated)
+/static

@@ -1,36 +1,20 @@
 StreamScout
 
+A website and API to get stream information
 
-# to run
-uvicorn app.main:app --reload
+![StreamScout Example](https://github.com/ncareau/StreamScout/raw/master/demo/demo.gif)
 
+## Requirements
 
-# frontend
+- Node with Yarn
+- Python 3.7
 
-## Project setup
-```
-yarn install
-```
+## Configuration and running
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+### Docker
 
-### Compiles and minifies for production
+```bash
+docker run -d --name streamscout \
+    -p 80:80 \
+    ncareau/streamscout
 ```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

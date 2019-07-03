@@ -1,56 +1,73 @@
 <template>
   <div id="app">
-    <section class="hero is-medium is-primary">
-      <div class="hero-body">
-        <div class="container">
-          <div class="columns">
-            <div class="column is-8-desktop is-offset-2-desktop">
-              <h1 class="title is-2 is-spaced">
-                StreamScout
-              </h1>
-              <h2 class="subtitle is-4">
-                  This site and API let's you find URL information on a stream like Twitch or youtube.
-              </h2>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <TheHeader/>
+
     <section class="section">
       <div class="container">
         <div class="columns">
           <div class="column is-8-desktop is-offset-2-desktop">
             <div class="content">
               <SearchBar></SearchBar>
+              <div v-if="isLoading" style="text-align: center;margin-bottom: 2em;">
+                <div class="fa-2x">
+                  <i class="fas fa-circle-notch fa-spin"></i>
+                </div>
+              </div>
+              <div class="margin-bottom: 2em;">
+                <div class="notification is-danger" v-for="(error, index) in searchErrors" :key="index">
+                  <button class="delete" v-on:click="removeError(error)"></button>
+                  {{error}}
+                </div>
+              </div>
+              <div class="card-columns">
+                <Stream v-for="(stream, index) in streams"
+                        :stream="stream"
+                        :key="stream.id + index"
+                />
+              </div>
             </div>
-
           </div>
         </div>
       </div>
     </section>
 
+    <TheFooter/>
   </div>
 </template>
 
 <script>
+  import TheHeader from "./components/TheHeader";
+  import TheFooter from "./components/TheFooter";
 
-import SearchBar from './components/SearchBar'
+  import SearchBar from "./components/SearchBar";
+  import Stream from "./components/Stream";
 
-export default {
-  name: 'app',
-  components: {
-    SearchBar
+  import {mapGetters} from "vuex";
+  import {REMOVE_SEARCH_ERROR_ACTION} from "./store/actions.type";
+
+  export default {
+    name: 'app',
+
+    components: {
+      SearchBar,
+      Stream,
+      TheFooter,
+      TheHeader
+    },
+    computed: {
+      ...mapGetters(["isLoading", "streams", "searchErrors"])
+    },
+    methods: {
+      removeError: function(error){
+        this.$store.dispatch(REMOVE_SEARCH_ERROR_ACTION, error)
+      }
+    }
+
   }
-}
+
+
 </script>
 
-<style>
-/*#app {*/
-/*  font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
-/*  -webkit-font-smoothing: antialiased;*/
-/*  -moz-osx-font-smoothing: grayscale;*/
-/*  text-align: center;*/
-/*  color: #2c3e50;*/
-/*  margin-top: 60px;*/
-/*}*/
+<style lang="scss">
+
 </style>

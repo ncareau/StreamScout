@@ -1,6 +1,6 @@
 const path = require("path");
 
 module.exports = {
-  outputDir: '../app/static',
+  outputDir: '../static',
   publicPath: '/static/'
 }
