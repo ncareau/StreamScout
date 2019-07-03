@@ -4,17 +4,15 @@ RUN \
   apt-get update \
   && apt-get -y install gettext-base
 
+RUN yarn global add @vue/cli-service -g
+
+RUN pip install fastapi uvicorn aiofiles streamlink
+
 COPY . /app
 
 WORKDIR /app
 
-RUN yarn global add @vue/cli-service -g
-
-RUN pip install -r requirements.txt
-
-RUN cd frontend && yarn install
-
-RUN cd frontend && yarn run build
+RUN cd frontend && yarn install && yarn run build
 
 EXPOSE 80
 

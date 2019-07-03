@@ -65,3 +65,5 @@ venv/*
 
 # Static app files (generated)
 /static
+
+.env.local

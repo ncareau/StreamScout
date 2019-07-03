@@ -1,11 +1,27 @@
 from fastapi import FastAPI, HTTPException
 from starlette.middleware.gzip import GZipMiddleware
+from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 from starlette.responses import HTMLResponse
 import uvicorn
-from streamlink import NoStreamsError, NoPluginError, PluginError, Streamlink
+from streamlink import NoPluginError, PluginError, Streamlink
+
+import os
 
 app = FastAPI()
+
+origins = [
+    os.environ['VUE_APP_API_URL'],
+    "http://localhost",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
