@@ -13,6 +13,9 @@ app = FastAPI()
 origins = [
     os.environ['VUE_APP_API_URL'],
     "http://localhost",
+    "https://localhost",
+    "http://127.0.0.1",
+    "https://127.0.0.1",
 ]
 
 app.add_middleware(

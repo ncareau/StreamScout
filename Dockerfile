@@ -15,5 +15,6 @@ WORKDIR /app
 RUN cd frontend && yarn install && yarn run build
 
 EXPOSE 80
+ENV VUE_APP_API_URL="http://localhost:80"
 
 CMD ["/app/entrypoint.sh"]
